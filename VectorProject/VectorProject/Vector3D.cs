@@ -102,6 +102,39 @@ namespace ConsoleApp1
             return result;
         }
 
+        public void Normalise()
+        {
+            float magnitude = this.Magnitude();
+            this.x /= magnitude;
+            this.y /= magnitude;
+            this.z /= magnitude;
+        }
+
+        public Vector3D Lerp(Vector3D dst, float delta)
+        {
+            Vector3D result = new Vector3D();
+
+            if (delta < 0.0f || delta > 1.0f)
+            {
+                Console.WriteLine("Invalid delta");
+                return result;
+            }
+
+            result = this.Scale(1 - delta).Add(dst.Scale(delta));
+
+            return result;
+        }
+
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+        }
+
+        public float Dot(Vector3D bVector)
+        {
+            return this.x * bVector.getX() + this.y * bVector.getY() + this.z * bVector.getZ();
+        }
+
         public override string ToString()
         {
             return "Vector3D: " + this.x + " " + this.y + " " + this.z;
