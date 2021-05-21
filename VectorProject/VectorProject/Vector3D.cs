@@ -83,9 +83,52 @@ namespace Session2
         {
             Vector3D result = new Vector3D();
 
-            result.x = -this.x;                     //or multiply 'x' by -1.
-            result.y = -this.y;                     //or multiply 'y' by -1.
-            result.z = -this.z;                     //or multiply 'z' by -1.
+            result.x = -this.x;
+            result.y = -this.y;
+            result.z = -this.z;
+
+            return result;
+        }
+
+        public void Normalize()
+        {
+            double mag = this.Magnitude();
+            this.x /= (float)mag; 
+            this.y /= (float)mag; 
+            this.z /= (float)mag;
+        }
+
+        public double Magnitude()
+        {
+            double length = 0.0f;
+
+            length = Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+
+            return length;
+        }
+
+        public Vector3D LERP(Vector3D dst, float delta)
+        {
+            Vector3D result = new Vector3D();
+
+            if((delta < 0.0f) || (delta > 1.0f))
+            {
+                Console.WriteLine("INVALID DELTA");
+                return result;
+            }
+
+            result.x = ((1 - delta) * this.x) + (delta * dst.x);
+            result.y = ((1 - delta) * this.y) + (delta * dst.y);
+            result.z = ((1 - delta) * this.z) + (delta * dst.z);
+
+            return result;
+        }
+
+        public double Dot(Vector3D b)
+        {
+            double result = 0.0f;
+
+            result = (this.x * b.x) + (this.y * b.y) + (this.z * b.z);
 
             return result;
         }
