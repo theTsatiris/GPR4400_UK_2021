@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class _playerController : MonoBehaviour
+{
+
+    public GameObject start, finish;
+    [SerializeField]private float delta = 0.0f, float speed = 0.1f;
+    private float counter = 0.0f, origY;
+
+    void Start()
+    {
+        origY = transform.position.y;
+    }
+    
+    void Update()
+    {
+        delta = 0.5f * Mathf.Cos(counter) + 0.5f;
+
+        float newX = (1 - delta) * start.transform.position.x + delta * finish.transform.position.x;
+        float newY = (1 - delta) * start.transform.position.y + delta * finish.transform.position.y;
+        newY = newY + origY;
+        float newZ = (1 - delta) * start.transform.position.z + delta * finish.transform.position.z;
+        transform.position = new Vector3(newX, newY, newZ);
+
+        counter += speed * Time.deltaTime;
+    }
+}
