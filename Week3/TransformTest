@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TransformTest : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Quaternion q = Quaternion.Euler(0.0f, 30.0f * Time.deltaTime, 0.0f);
+        //Matrix4x4 mat = Matrix4x4.Rotate(q);
+        //transform.position = mat.MultiplyPoint3x4(transform.position);
+
+        //Matrix4x4 mat = Matrix4x4.Translate(new Vector3(5.0f * Time.deltaTime, 5.0f * Time.deltaTime, 5.0f * Time.deltaTime));
+        //transform.position = mat.MultiplyPoint3x4(transform.position);
+
+        Matrix4x4 mat = Matrix4x4.Scale(new Vector3(1f + Time.deltaTime, 1f + Time.deltaTime, 1f + Time.deltaTime));
+        transform.localScale = mat.MultiplyPoint3x4(transform.localScale);
+    }
+}
